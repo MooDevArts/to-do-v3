@@ -1,6 +1,8 @@
 import Menu from "@/components/Menu";
+import { addTask } from "@/actions/tasks";
 
 export default function Home() {
+  addTask("Hi", "pls work");
   return (
     <div className="content">
       <div className="to-do green">Task 1asfasdfs</div>

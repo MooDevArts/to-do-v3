@@ -1,10 +1,16 @@
 import { Task } from "@/models/task";
-import mongoose from "mongoose";
+import { connectToDb } from "@/actions/general";
 
-async function connect() {
-  await mongoose.connect(process.env.MONGODB_URI, {
-    dbName: "tasks_next", // ✅ Force MongoDB to use "tasks_next"
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+async function addTask(name, description) {
+  await connectToDb();
+  const newTask = new Task({
+    name: name,
+    description: description,
+    status: "pending",
   });
+
+  let saved = await newTask.save();
+  console.log(saved);
 }
+
+export { addTask };
